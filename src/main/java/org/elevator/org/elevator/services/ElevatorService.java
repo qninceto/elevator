@@ -1,9 +1,9 @@
 package org.elevator.org.elevator.services;
 
-import java.util.List;
+import java.util.Set;
 
-import org.elevator.org.elevator.model.Elevator;
-import org.elevator.org.elevator.model.Person;
+import org.elevator.org.elevator.model.ElevatorModel;
+import org.elevator.org.elevator.model.PersonModel;
 
 public interface ElevatorService {
 	/**
@@ -13,8 +13,10 @@ public interface ElevatorService {
 	 * @param CurrentWeight
 	 * @return elevator
 	 */
-	Elevator createElevator (int currentFloor, int currentWeight);
+	ElevatorModel createElevator(int currentFloor);
 
-	void executeTheCalls(List <Person> people, List <Elevator> elevators);
-	
+	void executeTheCalls(Set<PersonModel> waitingPeople, ElevatorModel elevator) throws ElevatorException;
+
+	void stop(ElevatorModel elevator);
+
 }

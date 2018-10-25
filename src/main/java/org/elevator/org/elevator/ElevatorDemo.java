@@ -1,11 +1,12 @@
 package org.elevator.org.elevator;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
 
-import org.elevator.org.elevator.model.Elevator;
-import org.elevator.org.elevator.model.Person;
+import org.elevator.org.elevator.model.ElevatorModel;
+import org.elevator.org.elevator.model.PersonModel;
+import org.elevator.org.elevator.services.ElevatorException;
 import org.elevator.org.elevator.services.ElevatorService;
 import org.elevator.org.elevator.services.ElevatorServiceImpl;
 import org.elevator.org.elevator.services.PersonService;
@@ -19,11 +20,12 @@ public class ElevatorDemo {
 	private static final PersonService personService = new PersonServiceImpl();
 	private static final ElevatorService elevatorService = new ElevatorServiceImpl();
 
-	private static List<Person> people = new ArrayList<>();
-	private static List<Elevator> elevators = new ArrayList<>();
+	private static Set<PersonModel> people = new HashSet<>();
+	private static ElevatorModel elevator;
 
-	public static void main(String[] args) {
-		//TODO comma separated input
+	public static void main(String[] args) throws ElevatorException {
+		//tests
+		//javadoc
 
 		Scanner scan = new Scanner(System.in);
 
@@ -34,19 +36,16 @@ public class ElevatorDemo {
 			int startFloor = scan.nextInt();
 			int targetFloor = scan.nextInt();
 			int weight = scan.nextInt();
-			people.add(personService.createPerson(startFloor, targetFloor, weight));
+			if(personService.isValidRequest(startFloor, targetFloor)) {
+				people.add(personService.createPerson(startFloor, targetFloor, weight));
+			}
 		}
 
-		logger.info("Enter number of elevators: \n");
-		int numberOfElevators = scan.nextInt();
-		for (int i = 0; i < numberOfElevators; i++) {
-			logger.info("Enter the elevator`s starting floor and current weight: \n");
-			int startFloor = scan.nextInt();
-			int startWeight = scan.nextInt();
-			elevators.add(elevatorService.createElevator(startFloor, startWeight));
-		}
+		logger.info("Enter the elevator`s starting floor and current weight: \n");
+		int startFloor = scan.nextInt();
+		elevator = elevatorService.createElevator(startFloor);
 		scan.close();
 
-		elevatorService.executeTheCalls(people, elevators);
+		elevatorService.executeTheCalls(people, elevator);
 	}
 }

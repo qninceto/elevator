@@ -1,7 +1,9 @@
 package org.elevator.org.elevator.services;
 
-import org.elevator.org.elevator.model.Person;
+import org.elevator.org.elevator.model.PersonModel;
 
 public interface PersonService {
-	Person createPerson (int startFloor, int targetFloor, int weight);
+	PersonModel createPerson(int startFloor, int targetFloor, int weight);
+
+	boolean isValidRequest(int startFloor, int targetFloor);
 }
