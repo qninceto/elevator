@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
 
 public class ElevatorServiceImpl implements ElevatorService {
 
-	private static Logger logger = LoggerFactory.getLogger(ElevatorDemo.class);
+	private static Logger logger = LoggerFactory.getLogger(ElevatorServiceImpl.class);
 	private NavigableSet<Integer> requests = new TreeSet<>();
 	private Set <PersonModel> waitingPeople;
 	

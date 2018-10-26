@@ -14,7 +14,7 @@ public class ElevatorModel {
 	public final int FIRST_POSSIBLE_FLOOR = -1;
 	public final int LAST_POSSIBLE_FLOOR = 8;
 	
-	private static Logger logger = LoggerFactory.getLogger(ElevatorDemo.class);
+	private static Logger logger = LoggerFactory.getLogger(ElevatorModel.class);
 
 	private int currentFloor;
 	private int currentWeight;

@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 
 public class PersonServiceImpl implements PersonService {
 
-	private static Logger logger = LoggerFactory.getLogger(ElevatorDemo.class);
+	private static Logger logger = LoggerFactory.getLogger(PersonServiceImpl.class);
 
 	@Override
 	public PersonModel createPerson(int startFloor, int targetFloor, int weight) {
