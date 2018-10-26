@@ -1,5 +1,7 @@
 package org.elevator.org.elevator.model;
 
+import org.elevator.org.elevator.services.ElevatorException;
+
 public class PersonModel {
 	private int currentFloor;
 	private int targetFloor;
@@ -7,11 +9,11 @@ public class PersonModel {
 	private String name;
 	private static int counter;
 
-	public PersonModel(int currentFloor, int targetFloor, int weight) {
-		this.currentFloor = currentFloor;
-		this.targetFloor = targetFloor;
-		this.weight = weight;
-		this.name = "Person" + ++counter;
+	public PersonModel(int currentFloor, int targetFloor, int weight) throws ElevatorException {
+		this.setCurrentFloor(currentFloor);
+		this.setTargetFloor(targetFloor);
+		this.setWeight(weight);
+		this.name = "Person " + ++counter;
 	}
 
 	@Override
@@ -55,20 +57,32 @@ public class PersonModel {
 		return weight;
 	}
 
-	public void setCurrentFloor(int currentFloor) {
-		this.currentFloor = currentFloor;
+	public void setCurrentFloor(int currentFloor) throws ElevatorException {
+		if(currentFloor < ElevatorModel.LAST_POSSIBLE_FLOOR || currentFloor > ElevatorModel.FIRST_POSSIPLE_FLOOR) {
+			this.currentFloor = currentFloor;
+		}else {
+			throw new ElevatorException("invalid floor provided");
+		}
 	}
 
 	public void setName(String name) {
 		this.name = name;
 	}
 
-	public void setTargetFloor(int targetFloor) {
-		this.targetFloor = targetFloor;
+	public void setTargetFloor(int targetFloor) throws ElevatorException {
+		if(targetFloor < ElevatorModel.LAST_POSSIBLE_FLOOR || targetFloor > ElevatorModel.FIRST_POSSIPLE_FLOOR) {
+			this.targetFloor = targetFloor;
+		}else {
+			throw new ElevatorException("invalid floor provided");
+		}
 	}
 
-	public void setWeight(int weight) {
-		this.weight = weight;
+	public void setWeight(int weight) throws ElevatorException {
+		if(weight > 0) {
+			this.weight = weight;
+		}else {
+			throw new ElevatorException("invalid weight provided");
+		}
 	}
 
 	@Override

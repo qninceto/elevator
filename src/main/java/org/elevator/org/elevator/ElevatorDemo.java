@@ -24,28 +24,28 @@ public class ElevatorDemo {
 	private static ElevatorModel elevator;
 
 	public static void main(String[] args) throws ElevatorException {
-		//tests
-		//javadoc
 
 		Scanner scan = new Scanner(System.in);
 
-		logger.info("Enter number of people: \n");
+		logger.info("Enter the elevator`s starting floor: ");
+		int startFloor = scan.nextInt();
+		elevator = elevatorService.createElevator(startFloor);
+
+		logger.info("Enter number of people: ");
 		int numberOfPeole = scan.nextInt();
+		int targetFloor;
+		int weight;
 		for (int i = 0; i < numberOfPeole; i++) {
-			logger.info("Enter the person`s starting floor, desired floor and weight: ");
-			int startFloor = scan.nextInt();
-			int targetFloor = scan.nextInt();
-			int weight = scan.nextInt();
+			logger.info("Enter the person`s starting floor, desired floor and weight //space separated: ");
+			startFloor = scan.nextInt();
+			targetFloor = scan.nextInt();
+			weight = scan.nextInt();
 			if(personService.isValidRequest(startFloor, targetFloor)) {
 				people.add(personService.createPerson(startFloor, targetFloor, weight));
 			}
 		}
 
-		logger.info("Enter the elevator`s starting floor and current weight: \n");
-		int startFloor = scan.nextInt();
-		elevator = elevatorService.createElevator(startFloor);
 		scan.close();
-
 		elevatorService.executeTheCalls(people, elevator);
 	}
 }
